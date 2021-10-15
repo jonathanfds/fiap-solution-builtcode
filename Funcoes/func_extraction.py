@@ -16,10 +16,10 @@ def encontra_nome_empresa(nota_strings):
     for i in range(5):
         if regex.search("(SA)", nota_strings[i], flags=regex.IGNORECASE):
             match_nome = regex.search(r"[a-zA-Z].*(SA)", nota_strings[i], flags=regex.BESTMATCH | regex.IGNORECASE)
-            if match_nome:
+            if match_nome and len(match_nome.group().replace(" ", "")) >= 5:
                 return match_nome.group()
-
-    return NOT_FOUND
+    #Caso não encontre, retorna a primeira linha
+    return nota_strings[0]
 
 
 def encontra_cnpj_empresa(nota_strings):
